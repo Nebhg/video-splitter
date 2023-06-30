@@ -1,9 +1,13 @@
 # Importing all necessary libraries
+from random import random
+
 import cv2
 import os
+import shutil
 
 # Read the video from specified path
-cam = cv2.VideoCapture("C:/Users/benha/Desktop/bball/post fade.mp4")
+fileName = input("Please enter the name of your file: ")
+cam = cv2.VideoCapture("C:/Users/benha/Desktop/clips/" + fileName + ".mp4")
 
 try:
 
@@ -18,16 +22,16 @@ except OSError:
 # frame
 currentframe = 0
 
-while (True):
+while True:
 
     # reading from frame
     ret, frame = cam.read()
 
     if ret:
         # if video is still left continue creating images
-        name = './data/frame' + str(currentframe) + '.jpg'
+        name = './data/frame' + str(currentframe) + '.jpg'  
         print('Creating...' + name)
-
+        old_name = ""
         # writing the extracted images
         cv2.imwrite(name, frame)
 
@@ -40,12 +44,13 @@ while (True):
 
 image_list = sorted(os.listdir('C:/Users/benha/Desktop/pythonProject/data'))
 
-for i, img in enumerate(image_list):
-    if i % 3 != 0:
-        img_path = os.path.join('C:/Users/benha/Desktop/pythonProject/data', img)
-        os.remove(img_path)
-print('Deleting...' + str(i/3) + 'images')
+
+
+
+
+
 # Release all space and windows once done
 cam.release()
-
 cv2.destroyAllWindows()
+
+
